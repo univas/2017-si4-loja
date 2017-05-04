@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="public" match-name=".*"/>
+  
+  
+  <table schema="public" name="cliente">
+  	<primary-key>
+		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+		    <param name="optimizer">none</param>
+		    <param name="increment_size">1</param>
+		    <param name="sequence_name">public.seq_cliente</param>
+		</generator>
+  	</primary-key>
+  </table>
+  
+   <table schema="public" name="item">
+  	<primary-key>
+		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+		    <param name="optimizer">none</param>
+		    <param name="increment_size">1</param>
+		    <param name="sequence_name">public.seq_item</param>
+		</generator>
+  	</primary-key>
+  </table>
+  
+   <table schema="public" name="pedido">
+  	<primary-key>
+		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+		    <param name="optimizer">none</param>
+		    <param name="increment_size">1</param>
+		    <param name="sequence_name">public.seq_pedido</param>
+		</generator>
+  	</primary-key>
+  </table>
+  
+  <table schema="public" name="produto">
+  	<primary-key>
+		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+		    <param name="optimizer">none</param>
+		    <param name="increment_size">1</param>
+		    <param name="sequence_name">public.seq_produto</param>
+		</generator>
+  	</primary-key>
+  </table>
+  
+</hibernate-reverse-engineering>
