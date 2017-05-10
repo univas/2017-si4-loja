@@ -1,63 +1,64 @@
 package edu.univas.si4.bi;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.univas.si4.dao.ConnectionFactory;
-import edu.univas.si4.dao.DAOException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import edu.univas.si4.dao.ItemDAO;
-import edu.univas.si4.dao.OrderDAO;
-import edu.univas.si4.dao.ProductDAO;
+import edu.univas.si4.dao.PedidoDAO;
+import edu.univas.si4.dao.ProdutoDAO;
 import edu.univas.si4.entity.Cliente;
 import edu.univas.si4.entity.Item;
 import edu.univas.si4.entity.Pedido;
-import edu.univas.si4.entity.Product;
+import edu.univas.si4.entity.Produto;
 
 public class OrderBI {
 	
-	public static void createOrder(Cliente client, ArrayList<Item> items) throws OrderException {
-		try {
-			// Criar a conexão com o banco
-			Connection connection = ConnectionFactory.createConnection();
+	public static void createOrder(Cliente cliente, ArrayList<Item> items) throws OrderException {
+		EntityManagerFactory factory = 
+				Persistence.createEntityManagerFactory("loja");
+		
+		EntityManager entityManager = factory.createEntityManager();
 
-			// Iniciar a transação com setAutoCommit(false)
-			connection.setAutoCommit(false);
+		try {
+			entityManager.getTransaction().begin();
 			
 			// Inserir o Pedido
-			OrderDAO orderDAO = new OrderDAO(connection);
+			PedidoDAO pedidoDAO = new PedidoDAO(entityManager);
 
-			Pedido order = new Pedido();
-			order.setCodCliente(client.getCod());
-			order.setData(new Date());
+			Pedido pedido = new Pedido();
+			pedido.setCliente(cliente);
+			pedido.setData(new Date());
 			
-			orderDAO.insert(order); // O código do pedido foi atribuído dentro do insert
+			pedidoDAO.insert(pedido);
+			
+			System.out.println("Pedido de número " + pedido.getCod() + " criado");
 
 			// Foreach nos Itens, inserindo cada um dos itens
-			ItemDAO itemDAO = new ItemDAO(connection);
-			ProductDAO productDAO = new ProductDAO(connection);
+			ItemDAO itemDAO = new ItemDAO(entityManager);
+			ProdutoDAO productDAO = new ProdutoDAO(entityManager);
 			
 			for (Item item : items) {
-				Product product = productDAO.findForUpdate(item.getProductCode());
+				Produto product = item.getProduto();
 				
-				if(product != null && product.getBalance() >= item.getQuantity()) {
-					item.setOrderCode(order.getCod());
+				if(product.getSaldo() >= item.getQuantidade()) {
+					item.setPedido(pedido);
 					itemDAO.insert(item);
 					
-					product.setBalance(product.getBalance() - item.getQuantity());
+					product.setSaldo(product.getSaldo() - item.getQuantidade());
 					productDAO.update(product);
 				} else {
-					throw new OrderException(product, item.getQuantity());
+					throw new OrderException(product, item.getQuantidade());
 				}
 			}
 			
 			// Commit
-			connection.commit();
-		} catch (DAOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			entityManager.getTransaction().commit();
+		} finally {
+			entityManager.close();
 		}
 	}
 }

@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class ClienteAuditId implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private int cod;
 	private String emailAnterior;

@@ -1,12 +1,8 @@
-import java.util.Date;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import edu.univas.si4.entity.Cliente;
-import edu.univas.si4.entity.Pedido;
 
 
 public class TesteHibernate {

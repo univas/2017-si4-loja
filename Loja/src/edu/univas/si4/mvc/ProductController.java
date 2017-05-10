@@ -1,20 +1,20 @@
 package edu.univas.si4.mvc;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import edu.univas.si4.dao.DAOException;
-import edu.univas.si4.dao.ProductDAO;
-import edu.univas.si4.entity.Product;
+import edu.univas.si4.dao.ProdutoDAO;
+import edu.univas.si4.entity.Produto;
 
 public class ProductController {
-	private ProductDAO productDAO;
+	private ProdutoDAO produtoDAO;
 	
 	public ProductController() throws DAOException {
-		productDAO = new ProductDAO();
+		produtoDAO = new ProdutoDAO();
 	}
 
-	public ArrayList<Product> getProducts() {
+	public List<Produto> getProducts() {
 		
-		return productDAO.findAll();
+		return produtoDAO.findAll();
 	}
 }

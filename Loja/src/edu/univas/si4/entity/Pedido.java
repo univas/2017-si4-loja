@@ -24,6 +24,7 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "pedido", schema = "public")
 public class Pedido implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Integer cod;
 	private Cliente cliente;

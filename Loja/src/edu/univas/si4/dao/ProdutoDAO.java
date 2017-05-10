@@ -2,16 +2,16 @@ package edu.univas.si4.dao;
 
 import javax.persistence.EntityManager;
 
-import edu.univas.si4.entity.Item;
+import edu.univas.si4.entity.Produto;
 
-public class ItemDAO extends GenericDAO<Item, Integer> {
+public class ProdutoDAO extends GenericDAO<Produto, Integer> {
 
-	public ItemDAO() {
+	public ProdutoDAO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ItemDAO(EntityManager entityManager) {
+	public ProdutoDAO(EntityManager entityManager) {
 		super(entityManager);
 		// TODO Auto-generated constructor stub
 	}

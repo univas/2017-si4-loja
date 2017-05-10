@@ -4,8 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,9 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import edu.univas.si4.dao.DAOException;
-import edu.univas.si4.entity.Product;
+import edu.univas.si4.entity.Produto;
 
 public class ProductPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
 	private ProductController controller;
 	
 	private JTextField fieldProduct;
@@ -92,15 +94,15 @@ public class ProductPanel extends JPanel {
 	}
 
 	private void updateTable() {
-		ArrayList<Product> products = controller.getProducts();	
+		List<Produto> produtos = controller.getProducts();	
 		
 		tableModel.setRowCount(0); // Reset
 		
-		for (Product product : products) {
+		for (Produto produto : produtos) {
 			tableModel.addRow(new String[]  {
-				String.valueOf(product.getCode()),
-				product.getName(),
-				String.valueOf(product.getBalance())
+				String.valueOf(produto.getCod()),
+				produto.getNome(),
+				String.valueOf(produto.getSaldo())
 			});
 			
 		}

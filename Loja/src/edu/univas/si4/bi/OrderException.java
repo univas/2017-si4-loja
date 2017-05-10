@@ -1,14 +1,14 @@
 package edu.univas.si4.bi;
 
-import edu.univas.si4.entity.Product;
+import edu.univas.si4.entity.Produto;
 
 public class OrderException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private Product product;
+	private Produto product;
 	
 	private int quantity;
 	
-	public OrderException(Product product, int quantity) {
+	public OrderException(Produto product, int quantity) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
@@ -18,11 +18,11 @@ public class OrderException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product getProduct() {
+	public Produto getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(Produto product) {
 		this.product = product;
 	}
 

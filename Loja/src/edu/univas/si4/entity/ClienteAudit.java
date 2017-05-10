@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente_audit", schema = "public")
 public class ClienteAudit implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private ClienteAuditId id;
 

@@ -19,7 +19,8 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "produto", schema = "public")
 public class Produto implements java.io.Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Integer cod;
 	private String nome;
 	private int saldo;
