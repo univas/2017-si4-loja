@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 public class GenericDAO<Entity, PK> {
 	
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 	private Class<Entity> persistentClass;
 	
 	@SuppressWarnings("unchecked")
@@ -55,4 +55,5 @@ public class GenericDAO<Entity, PK> {
 		Query query = entityManager.createQuery("FROM " + persistentClass.getCanonicalName());
 		return query.getResultList();
 	}
+	
 }
